@@ -12,6 +12,6 @@ Neuroritmo é um jogo arcade com elementos rítmicos feito em Python com auxíli
 
 ##Convensões
 
-Foi feito como um projeto para a faculdade, ou seja, você pode utilizar o jogo da maneira que desejar e inclusive adaptar/aprimorar-lo. Se for usá-lo para fins acadêmicos ou expositivos, agradeço se puder acrescentar meu nome aos créditos.
+Foi feito como um projeto para a faculdade, ou seja, você pode utilizar o jogo da maneira que desejar e inclusive adaptar/aprimorá-lo. Se for usá-lo para fins acadêmicos ou expositivos, agradeço se puder acrescentar meu nome aos créditos.
 
 Divirtam-se :)
