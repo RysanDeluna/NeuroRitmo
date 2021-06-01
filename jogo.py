@@ -220,7 +220,7 @@ def __jogo(): #PRONTO
                                 erros +=1
                                 som_erro.play()
                         # CÓDIGO SECRETO :o
-                        elif event.key == pygame.K_v and pygame.K_i and pygame.K_b and pygame.K_e:
+                        elif event.key == (pygame.K_v and pygame.K_i and pygame.K_b and pygame.K_e):
                             pygame.mixer.music.stop()
                 # Atualizações da tela
                 pontuacao, contAcertos, contErros = contadorPontos(pontos, fonteContador, acertos, erros)
