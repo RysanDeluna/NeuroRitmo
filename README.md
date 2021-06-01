@@ -2,7 +2,7 @@
 
 ##Jogo criado por:
   - Ryan Marco Andrade dos Santos
-Desenvolvido como projeto para a Universidade Presbiteriana Mackenzie
+e desenvolvido como projeto para a Universidade Presbiteriana Mackenzie
 
 
 ##Descrição
