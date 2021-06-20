@@ -1,7 +1,7 @@
 import pygame, random, sys, time
 from funcoes import fontes, def_Tela, animacoes_Jogo
 
-def telaJogo(): #PRONTO
+def telaJogo(): 
     tela = def_Tela()
     # Carregando imagens de jogo
     bgJOOJ = pygame.image.load("imgs/planoDeFundo/bgJOOJ.png")
@@ -14,7 +14,7 @@ def telaJogo(): #PRONTO
     botaoPressionado = pygame.transform.scale(botaoPressionado,[102,60])
     return tela, bgJOOJ, celulasAlvo, botao, botaoPressionado
 
-def randomizator(contadorAlvo, pistas): #PRONTO
+def randomizator(contadorAlvo, pistas): 
     # Determina a cada quantos clocks, nesta instância, será requisitada uma nova nota
     aleatorizador = random.randint(3,12)  # Quanto menor estes valores, mais difícil fica
     alvo = None
@@ -26,14 +26,14 @@ def randomizator(contadorAlvo, pistas): #PRONTO
             alvo = random.choice(pistas)
     return alvo
 
-def contadorPontos(pontos, fonteCont, qntAcertos, qntErros): #PRONTO
+def contadorPontos(pontos, fonteCont, qntAcertos, qntErros): 
     # Renderiza os textos para os placares de acordo com a quantidade de pontos, erros e acertos e retorna esses textos
     pontuacao = fonteCont.render("QI:"+str(pontos), True,(75,0,130))
     acertos = fonteCont.render("Acertos:"+str(qntAcertos), True, (75,0,130))
     erros = fonteCont.render("Erros:"+str(qntErros), True, (75,0,130))
     return pontuacao, acertos, erros
 
-def contagemINIcio(tela, bgJOOJ, som): #PRONTO
+def contagemINIcio(tela, bgJOOJ, som): 
     # Define a lista de elementos para contagem
     contagem = ["  3","  2","  1","Vai!"]
     # Define a fonte
@@ -60,14 +60,14 @@ def contagemINIcio(tela, bgJOOJ, som): #PRONTO
         # Aguarda 1 segundo
         pygame.time.delay(1000)
 
-def sonsJogo(): #PRONTO
+def sonsJogo():
     som_erro = pygame.mixer.Sound("audios/erro.mp3")
     som_acerto = pygame.mixer.Sound("audios/acerto.wav")
     som_contagem = pygame.mixer.Sound("audios/contagem.wav")
     pygame.mixer.music.load("audios/cryptOfTheNeuroDancer.mp3")
     return som_acerto, som_erro, som_contagem
 
-def feedback(pontos): #PRONTO
+def feedback(pontos):
     tela = def_Tela()
     # Fontes e sentenças a serem utilizadas
     fonte = pygame.font.SysFont("OCR A Extended", 40)
@@ -115,8 +115,10 @@ def feedback(pontos): #PRONTO
             pygame.mixer.music.set_volume(0.7)
     return "menu"
 
-def __jogo(): #PRONTO
+def __jogo():
     #definições de variáveis que serão utilizadas
+    import RPi.GPIO as GPIO
+    GPIO.setmode(GPIO.BOARD)
     alvo = None
     contadorAlvo = 0
     pontos = 0
@@ -124,6 +126,12 @@ def __jogo(): #PRONTO
     i = 0
     erros = 0
     acertos = 0
+    
+    #Configurando os pinos
+    GPIO.setup(8, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+    GPIO.setup(10, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+    GPIO.setup(27, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+    GPIO.setup(40, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
     
     #Funções chamadas
     tela, bgJOOJ, celulasAlvo, botao, botaoPessionado = telaJogo()
@@ -160,68 +168,61 @@ def __jogo(): #PRONTO
             # Mantém o jogo junto às animações para que os comandos possam ser feitos simultaneamente
             # ao carregamento dos sprites
             for i in sprite:
-                for event in pygame.event.get():
-                    if event.type == pygame.QUIT:
-                            pygame.quit()
-                            sys.exit()
-                    # VERIFICAÇÃO DE ACERTO
-                    if event.type == pygame.KEYDOWN:
-                        if event.key == pygame.K_d:
-                            # efeito visual para indicar que o botão foi pressionado
-                            tela.blit(botaoPessionado,(0,525))
-                            tela.blit(D2,(45,545))
-                            if alvo == 0:  #ACERTO
-                                tela.blit(animacao_acerto,(0,80))
-                                pontos += 1
-                                acertos += 1
-                                som_acerto.play()
-                                verificador = True
-                            else:          #ERRO
-                                pontos -= 1
-                                erros +=1
-                                som_erro.play()
-                        elif event.key == pygame.K_f:
-                            tela.blit(F2,(145,545))
-                            tela.blit(botaoPessionado,(100,525))
-                            if alvo == 1: #ACERTO
-                                tela.blit(animacao_acerto,(98,80))                            
-                                pontos += 1
-                                acertos += 1
-                                som_acerto.play()
-                                verificador = True
-                            else:        #ERRO
-                                pontos -= 1
-                                erros +=1
-                                som_erro.play()
-                        elif event.key == pygame.K_j:
-                            tela.blit(botaoPessionado,(200,525))
-                            tela.blit(J2,(245,545))
-                            if alvo == 2:  #ACERTO
-                                tela.blit(animacao_acerto,(200,80))                            
-                                pontos += 1
-                                acertos += 1
-                                som_acerto.play()
-                                verificador = True
-                            else:          #ERRO
-                                pontos -= 1
-                                erros +=1
-                                som_erro.play()
-                        elif event.key == pygame.K_k:
-                            tela.blit(botaoPessionado,(300,525))
-                            tela.blit(K2,(345,545))
-                            if alvo == 3:  #ACERTO
-                                tela.blit(animacao_acerto,(294,80))                           
-                                pontos += 1    
-                                acertos += 1
-                                som_acerto.play()
-                                verificador = True
-                            else:         #ERRO
-                                pontos -= 1
-                                erros +=1
-                                som_erro.play()
-                        # CÓDIGO SECRETO :o
-                        elif event.key == (pygame.K_v and pygame.K_i and pygame.K_b and pygame.K_e):
-                            pygame.mixer.music.stop()
+                # VERIFICAÇÃO DE ACERTO
+                if (GPIO.input(8) == 1):
+                    # efeito visual para indicar que o botão foi pressionado
+                    tela.blit(botaoPessionado,(0,525))
+                    tela.blit(D2,(45,545))
+                    if alvo == 0:  #ACERTO
+                        tela.blit(animacao_acerto,(0,80))
+                        pontos += 1
+                        acertos += 1
+                        som_acerto.play()
+                        verificador = True
+                    else:          #ERRO
+                        pontos -= 1
+                        erros +=1
+                        som_erro.play()
+                elif (GPIO.input(10) == 1):
+                    tela.blit(F2,(145,545))
+                    tela.blit(botaoPessionado,(100,525))
+                    if alvo == 1: #ACERTO
+                        tela.blit(animacao_acerto,(98,80))                            
+                        pontos += 1
+                        acertos += 1
+                        som_acerto.play()
+                        verificador = True
+                    else:        #ERRO
+                        pontos -= 1
+                        erros +=1
+                        som_erro.play()
+                elif (GPIO.input(27) == 1):
+                    tela.blit(botaoPessionado,(200,525))
+                    tela.blit(J2,(245,545))
+                    if alvo == 2:  #ACERTO
+                        tela.blit(animacao_acerto,(200,80))                            
+                        pontos += 1
+                        acertos += 1
+                        som_acerto.play()
+                        verificador = True
+                    else:          #ERRO
+                        pontos -= 1
+                        erros +=1
+                        som_erro.play()
+                elif (GPIO.input(40) == 1):
+                    tela.blit(botaoPessionado,(300,525))
+                    tela.blit(K2,(345,545))
+                    if alvo == 3:  #ACERTO
+                        tela.blit(animacao_acerto,(294,80))                           
+                        pontos += 1    
+                        acertos += 1
+                        som_acerto.play()
+                        verificador = True
+                    else:         #ERRO
+                        pontos -= 1
+                        erros +=1
+                        som_erro.play()
+
                 # Atualizações da tela
                 pontuacao, contAcertos, contErros = contadorPontos(pontos, fonteContador, acertos, erros)
                 tela.blit(i, (alvo*97,80))        
