@@ -15,3 +15,9 @@ Neuroritmo é um jogo arcade com elementos rítmicos feito em Python com auxíli
 Foi feito como um projeto para a faculdade, ou seja, você pode utilizar o jogo da maneira que desejar e inclusive adaptar/aprimorá-lo. Se for usá-lo para fins acadêmicos ou expositivos, agradeço se puder acrescentar meu nome aos créditos.
 
 Divirtam-se :)
+
+## Créditos
+- Música por:
+> "Kick Shock" Kevin MacLeod (incompetech.com)
+Licensed under Creative Commons: By Attribution 4.0 License
+http://creativecommons.org/licenses/by/4.0/
