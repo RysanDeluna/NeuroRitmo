@@ -3,6 +3,7 @@
 ## Jogo criado por:
   - Ryan Marco Andrade dos Santos
 e desenvolvido como projeto para a Universidade Presbiteriana Mackenzie.
+https://rysandeluna.itch.io/neuro-rythm
 
 
 ## Descrição
