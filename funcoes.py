@@ -14,7 +14,7 @@ def def_Tela(): #PRONTO
     tela.fill((0,0,0))
     porque_sim = ["NeuroRitmo","Vamos Dançar","Exercitando o Cérebro","Atividade Neural Acontecendo o.O",     \
                    "Fritação Pura","Estou chocado :O","Feito com carinho <3","Just V I B E","Experimento no.3",\
-                   "Analisando dados bip--bop//","Crab rave \i=i/","Rave sem neura","Synth a wave",            \
+                   "Analisando dados bip--bop//","Crab rave \\i=i/","Rave sem neura","Synth a wave",            \
                    "Technomancer x.x","Música><Pensamentos><Se propagando<<>><<>>"]
     a = random.choice(porque_sim)
     pygame.display.set_caption(a)

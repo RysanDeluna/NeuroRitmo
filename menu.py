@@ -2,45 +2,45 @@ import pygame, sys
 from funcoes import def_Tela, fontes
 pygame.init()
 
-def menu_Principal(): #PRONTO
-    # definições da tela
-    tela = def_Tela()
+def main_menu(): #PRONTO
+    # definições da window
+    window = def_Tela()
 
-    # carregando as imagens da tela inicial
+    # carregando as imagens da window inicial
     bg = pygame.image.load("imgs/planoDeFundo/bg200.png")
     bg = pygame.transform.scale(bg,[400,600])
-    botao1 = pygame.image.load("imgs/botoes/Botao1x.png")
-    botao1 = pygame.transform.scale(botao1,[135,50])
-    botao2 = pygame.image.load("imgs/botoes/Botao2x.png")
-    botao2 = pygame.transform.scale(botao2, [45,45])
+    button1 = pygame.image.load("imgs/botoes/Botao1x.png")
+    button1 = pygame.transform.scale(button1,[135,50])
+    button2 = pygame.image.load("imgs/botoes/Botao2x.png")
+    button2 = pygame.transform.scale(button2, [45,45])
 
     # Definindo a Fonte e Renderizando
-    fonteBotao, fonteTitulo, fonteContador = fontes()
-    tituloJogo = fonteTitulo.render("NeuroRitmo", True, (255,215,0))
-    Bjogar = fonteBotao.render("JOGAR", True, (255,99,71))
-    Bsair = fonteBotao.render("X", True, (255,99,71))
-    Binstru = fonteBotao.render("?", True, (255,99,71))
-    Bcred = fonteBotao.render("CRÉDITOS", True, (255,99,71))
+    button_font, title_font, counter_font = fontes()
+    game_title = title_font.render("NeuroRitmo", True, (255,215,0))
+    play_b = button_font.render("JOGAR", True, (255,99,71))
+    quit_b = button_font.render("X", True, (255,99,71))
+    instructions_b = button_font.render("?", True, (255,99,71))
+    credits_b = button_font.render("CRÉDITOS", True, (255,99,71))
 
-    # definição dos elementos da tela 
-    tela.blit(bg,(0,0))
-    tela.blit(botao1,(92,257))
-    tela.blit(botao1,(92,320))
-    tela.blit(botao2,(339,485))
-    tela.blit(botao2,(339,543))
-    tela.blit(tituloJogo,[118,100])
-    tela.blit(Bjogar,[120,274])
-    tela.blit(Bsair,[354,556])
-    tela.blit(Binstru,[354,499])
-    tela.blit(Bcred, [102,333])
+    # definição dos elementos da window
+    window.blit(bg,(0,0))
+    window.blit(button1,(92,257))
+    window.blit(button1,(92,320))
+    window.blit(button2,(339,485))
+    window.blit(button2,(339,543))
+    window.blit(game_title,[118,100])
+    window.blit(play_b,[120,274])
+    window.blit(quit_b,[354,556])
+    window.blit(instructions_b,[354,499])
+    window.blit(credits_b, [102,333])
     pygame.display.update()
 
     # Carregando sons
-    aperta_botao = pygame.mixer.Sound("audios/selecao.wav")
+    press_button = pygame.mixer.Sound("audios/selecao.wav")
     pygame.mixer.music.load("audios/temaPrin.mp3")
 
-    sair = False
-    while not sair: 
+    quit_flag = False
+    while not quit_flag:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
@@ -51,17 +51,17 @@ def menu_Principal(): #PRONTO
                 x = pygame.mouse.get_pos()[0]
                 y = pygame.mouse.get_pos()[1]
                 if x>=92 and x<=227 and y>=257 and y<=307:
-                    aperta_botao.play()   
+                    press_button.play()
                     pygame.mixer.music.stop()
                     pygame.mixer.music.unload()
                     return "joguinho"
                 if x>=92 and x<=227 and y>=321 and y<=367:
-                    aperta_botao.play()
+                    press_button.play()
                     pygame.mixer.music.stop()   
                     pygame.mixer.music.unload()
                     return "créditos"
                 if x>=346 and x<=377 and y>=491 and y<=524:
-                    aperta_botao.play()   
+                    press_button.play()
                     pygame.mixer.music.stop()
                     pygame.mixer.music.unload()
                     return "instruções"
@@ -72,9 +72,9 @@ def menu_Principal(): #PRONTO
         if not pygame.mixer.music.get_busy():
             pygame.mixer.music.play()
 
-def __créditos(): #PRONTO 
-    tela = def_Tela()
-    selecao = pygame.mixer.Sound("audios/selecao.wav")
+def __credits(): #PRONTO
+    window = def_Tela()
+    selection = pygame.mixer.Sound("audios/selecao.wav")
     pygame.mixer.music.load("audios/temaPrin.mp3")
 
     bg = pygame.image.load("imgs/planoDeFundo/bgCRED.png")
@@ -95,39 +95,39 @@ def __créditos(): #PRONTO
     creditos7 = fonte.render("-Música de Fundo: Disco Descent(1-1) ", True, (255,215,0))
     creditos8 = fonte.render("-Efeitos sonoros por: LittleBotSoundFactory ", True, (255,215,0))
     creditos9 = fonte.render("-Resultado da partida: Honeybone82", True, (255,215,0))
-    Bsair = fonteBotao.render("X", True, (249,120,90))
+    quit_b = fonteBotao.render("X", True, (249,120,90))
 
-    botaoM = pygame.image.load("imgs/botoes/Botao2x.png")
-    botaoM = pygame.transform.scale(botaoM,[45,45])
+    m_button = pygame.image.load("imgs/botoes/Botao2x.png")
+    m_button = pygame.transform.scale(m_button,[45,45])
 
-    tela.blit(bg,(0,0))
-    tela.blit(creditos1,(101,112))
-    tela.blit(creditos2,(101,139))
-    tela.blit(creditos3,(130,197))
-    tela.blit(creditos4,(101,272))
-    tela.blit(creditos5,(116,312))
-    tela.blit(creditos6,(110,352))
-    tela.blit(creditos7,(94,392))
-    tela.blit(creditos8,(79,419))
-    tela.blit(creditos9,(94,446))
-    tela.blit(botaoM,(300,545))
-    tela.blit(Bsair, (312,550))
-    tela.blit(smiley,(133,470))
+    window.blit(bg,(0,0))
+    window.blit(creditos1,(101,112))
+    window.blit(creditos2,(101,139))
+    window.blit(creditos3,(130,197))
+    window.blit(creditos4,(101,272))
+    window.blit(creditos5,(116,312))
+    window.blit(creditos6,(110,352))
+    window.blit(creditos7,(94,392))
+    window.blit(creditos8,(79,419))
+    window.blit(creditos9,(94,446))
+    window.blit(m_button,(300,545))
+    window.blit(quit_b, (312,550))
+    window.blit(smiley,(133,470))
     pygame.display.update()
 
 
-    sair = False
-    while not sair:
+    quit_flag = False
+    while not quit_flag:
         for event in pygame.event.get():
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
-                    sair = True
+                    quit_flag = True
             if event.type == pygame.MOUSEBUTTONDOWN:
                 x = pygame.mouse.get_pos()[0]
                 y = pygame.mouse.get_pos()[1]
                 if x>=300 and x<=345 and y>=545 and y<=590:
-                    selecao.play()
-                    sair = True
+                    selection.play()
+                    quit_flag = True
 
             if event.type == pygame.QUIT:
                 pygame.quit()
@@ -136,9 +136,9 @@ def __créditos(): #PRONTO
             pygame.mixer.music.play()
     return "menu"
 
-def __instruções(): #PRONTO
-    tela = def_Tela()
-    selecao = pygame.mixer.Sound("audios/selecao.wav")
+def __instructions(): #PRONTO
+    window = def_Tela()
+    selection = pygame.mixer.Sound("audios/selecao.wav")
     pygame.mixer.music.load("audios/temaPrin.mp3")
 
     fonte = pygame.font.SysFont("Californian FB",17)
@@ -146,11 +146,11 @@ def __instruções(): #PRONTO
     fonteT = pygame.font.SysFont("Jokerman", 24)
     fonteE = pygame.font.SysFont("Viner Hand ITC",26, bold=False)
     fonteBotao = pygame.font.SysFont("OCR A Extended", 30, bold=True)
-    Bsair = fonteBotao.render("X", True, (249,120,90))
+    quit_b = fonteBotao.render("X", True, (249,120,90))
 
     titulo = fonteT.render("COMO JOGAR", True, (255,215,0))
     inst1 = fonte.render("Iremos pensar ao ritmo da música :)", True, (255,215,0))
-    inst2 = fonte.render("Haverão 4 neurônios presentes na tela;", True, (255,215,0))
+    inst2 = fonte.render("Haverão 4 neurônios presentes na window;", True, (255,215,0))
     inst3 = fonte.render("cada célula tem uma tecla respectiva", True, (255,215,0))
     inst4 = fonte.render("as quais são:", True, (255,215,0))
     inst5 = fonteN.render("D    F    J    K", True, (255,215,0))
@@ -159,35 +159,35 @@ def __instruções(): #PRONTO
 
     bg = pygame.image.load("imgs/planoDeFundo/bgCRED.png")
     bg = pygame.transform.scale(bg,[400,600])
-    botaoM = pygame.image.load("imgs/botoes/Botao2x.png")
-    botaoM = pygame.transform.scale(botaoM,[45,45])
+    m_button = pygame.image.load("imgs/botoes/Botao2x.png")
+    m_button = pygame.transform.scale(m_button,[45,45])
 
-    tela.blit(bg,(0,0))
-    tela.blit(titulo,(130,170))
-    tela.blit(inst1,(85,235))
-    tela.blit(inst2,(75,260))
-    tela.blit(inst3,(75,285))
-    tela.blit(inst4,(75,310))
-    tela.blit(inst5,(176,311))
-    tela.blit(inst6,(75,335))
-    tela.blit(inst7,(162,385))
-    tela.blit(botaoM,(300,545))
-    tela.blit(Bsair, (312,550))
+    window.blit(bg,(0,0))
+    window.blit(titulo,(130,170))
+    window.blit(inst1,(85,235))
+    window.blit(inst2,(75,260))
+    window.blit(inst3,(75,285))
+    window.blit(inst4,(75,310))
+    window.blit(inst5,(176,311))
+    window.blit(inst6,(75,335))
+    window.blit(inst7,(162,385))
+    window.blit(m_button,(300,545))
+    window.blit(quit_b, (312,550))
 
     pygame.display.update()
 
-    sair = False
-    while not sair:
+    quit_flag = False
+    while not quit_flag:
         for event in pygame.event.get():
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_F1:
-                    sair = True
+                    quit_flag = True
             if event.type == pygame.MOUSEBUTTONDOWN:
                 x = pygame.mouse.get_pos()[0]
                 y = pygame.mouse.get_pos()[1]
                 if x>=300 and x<=345 and y>=545 and y<=590:
-                    selecao.play()
-                    sair = True
+                    selection.play()
+                    quit_flag = True
 
             if event.type == pygame.QUIT:
                 pygame.quit()
